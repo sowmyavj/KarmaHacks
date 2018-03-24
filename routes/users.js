@@ -4,9 +4,7 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 const data = require("../data");
 const userData = data.users;
-const travelData = data.travel;
-const budgetData = data.budget;
-const connectionData=data.connection;
+
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 var cloudinary = require('cloudinary').v2;
