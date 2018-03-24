@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+  <title>Effugio</title>
+</head>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12" id="profilearea">
+
+            <div class="card hovercard">
+                <div class="cardheader">
+
+                </div>
+                <div class="avatar">
+                    <img src="http://res.cloudinary.com/effugio/image/upload/w_199,h_200,c_fill,r_20/{{profilePicID}}.png" class="avatar img-circle" alt="avatar">
+                </div>
+                <div class="info">
+                    <div class="title">
+                       {{checkuser.name }}
+                    </div>
+                    <div class="desc" id="location">Lives in {{checkuser.location}}</div>
+                    <div class="desc" id="Occupation">Occupation: {{checkuser.occupation}}</div>
+                    <div class="desc" id="dob">{{{toage checkuser.dob }}} years</div>
+                    <div class="desc" id="budgetrange">Budget range: {{{getbudget checkuser.budget }}} $</div>
+                    {{#if conn.connected }}
+                        <div class="desc" id="contactnum">Contact Information: {{checkuser.contact_info}}</div>
+                        <div class="desc" id="emailaddr">Email: {{checkuser.email}}</div>
+                    {{/if}}
+                    <div class="desc" id="travellocprefs">Travel Location Preferences:</div>
+                    {{#each checkuser.location_pref}}
+                        <ul  style="list-style: none" class="desc"> 
+                            <li>{{{ getlocation this}}}</li>
+                        </ul>
+                    {{/each}}
+
+                            {{> connect_item }}
+                    <!--Commenting <div class="desc" id="connectrequeststatus">
+                        {{#if conn.notConnected}}
+                            <a class="finishItem" data-id="{{checkuser._id}}" data-user="{{user._id}}">Connect</a> 
+                        {{/if}}
+                        {{#if conn.connected }}
+                            <em>You are connected</em>
+                        {{/if}}
+                        {{#if conn.requestSent }}
+                            <em>Request sent</em>
+                        {{/if}}
+                        {{#if conn.requestReceieved }}
+                            <em>Your response is pending</em>
+                        {{/if}}
+                     </div>
+                     -->
+                </div>
+               
+            </div>
+
+        </div>
+
+	</div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="/public/js/checkprofile.js">
+
+</script>
