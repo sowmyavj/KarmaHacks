@@ -30,6 +30,10 @@
                             <label>Full Name</label>
                             <input type="text" class="form-control" placeholder="Full Name" name="name" id="name" pattern="[A-Za-z' ]+" minlength="2" maxlength="80" value="{{user.name}}" disabled="disabled">
                         </div>
+                         <div class="col-sm-4 form-group">
+                            <label for="points">Karma Points</label>
+                            <input class="form-control" id="points" name="points" placeholder="points" type="numeric" value="{{user.points}}" disabled="disabled">
+                        </div>
                         <input type="hidden" id="name2" name="name" value="{{user.name}}">
                         <div class="col-sm-6 form-group">
                             <label for="gender">Gender</label>
@@ -40,18 +44,18 @@
                                 {{/multiselect}}
                             </select>
                         </div>
+
+                        <div class="col-sm-6 form-group">
+                            <select class="custom-select form-control" name="isOrganisation" id="isOrganisation" disabled="disabled">
+                                {{#multiselect user.isOrganisation}}
+                                <option value="0">Individual</option>
+                                <option value="1">Organisation</option>
+                                {{/multiselect}}
+                            </select>
+                        </div>
                           <input type="hidden" id="gender2" name="gender" value="{{user.gender}}">
                     </div>
-                    <div class="form-group">
-                        <label for="orientation">Orientation</label>
-                        <select class="form-control" name="orientation" id="orientation" disabled="disabled">
-                            {{#multiselect user.orientation}}
-                            <option value="S">Straight</option>
-                            <option value="G">Gay</option>
-                            <option value="L">Lesbian</option>
-                            {{/multiselect}}
-                        </select>
-                    </div>
+                   
                     <input type="hidden" id="orientation2" name="orientation" value="{{user.orientation}}">
 
                     <div class="row">
@@ -70,36 +74,7 @@
                             <input type="text" class="form-control" placeholder="Occupation" name="occupation" id="occupation" pattern="[a-zA-Z]+[' -,]{0,1}[a-zA-Z]+" minlength="2" maxlength="80" value="{{user.occupation}}">
                          </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <label for="contact_info">Contact Information</label>
-                            <input type="text" class="form-control" placeholder="Phone: 9999999999" name="contact_info" id="contact_info" pattern="[1-9]{3}[0-9]{3}[0-9]{4}" minlength="10" maxlength="10" value="{{user.contact_info}}">
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            <label for="locationpref">Location Preferences</label>
-                            <select multiple class="form-control" id="locationpref" name="location_pref">
-                                {{#multiselect user.location_pref}} 
-                                {{#if locations.length}} 
-                                    {{#each locations}}
-                                        <option value="{{this._id}}">{{this.name}}</option>
-                                    {{/each}} 
-                                {{/if}} 
-                                {{/multiselect}}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="budgetpref">Budget Preference</label>
-                        <select class="custom-select form-control" id="budgetpref" name="budget">
-                            {{#multiselect user.budget}}
-                            {{#if budgetranges.length}}
-                                {{#each budgetranges}}
-                                    <option value="{{this.id}}">{{this.range}}</option>
-                                {{/each}}
-                            {{/if}}
-                            {{/multiselect}}  
-                        </select>
-                    </div>
+                   
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="{{user.email}}">
