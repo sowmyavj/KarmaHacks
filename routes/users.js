@@ -5,6 +5,7 @@ var Strategy = require('passport-local').Strategy;
 const data = require("../data");
 const userData = data.users;
 const deedsData = data.deeds;
+const deedsRatingData=data.deeds_rating;
 const uuidv1 = require('uuid/v4');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
@@ -267,13 +268,13 @@ router.post('/dashboard',
             voter_id: req.user._id,
             user_id:req.body.deeduserid,
             deed_id: req.body.deedid,
-            rating: req.body.rating,
+            rating: parseInt(req.body.rating),
             dateOfRating: date
     }
-    // let result = await deedsData.addDeed(deed)
-    // console.log("added deed:: ")
-    // console.log(result);
-    let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
+    let result = await deedsRatingData.addDeedRating(rating);
+     console.log("added deed rating:: ")
+    console.log(result);
+    let deedData = await deedsData.getAllDeedsForUser(req.user._id);
     res.render('users/dashboard', {
       user: req.user,
       deed : deedData 

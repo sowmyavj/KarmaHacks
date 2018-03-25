@@ -126,6 +126,7 @@ let exportedMethods = {
         let c1 = await this.calculateDeedScore(d._id);
 
         deedObject.id= d.user_id;
+        deedObject.deedid=d._id;
         deedObject.userName = user.name;
         deedObject.karmaCount = c1;
         deedObject.karmaPoints = 0;
@@ -146,6 +147,9 @@ let exportedMethods = {
       }
     });
 
+    deedlist.forEach((eachDeed) => {
+        eachDeed.karmaPoints = userID.get(eachDeed.id);
+      });
     return deedlist;
   }
 
