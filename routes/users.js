@@ -176,7 +176,8 @@ router.get('/dashboard',
   async function (req, res) {
 
     let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
-    console.log(typeof deedData);
+    console.log("\n\n***********************\n\n")
+    console.log(deedData);
 
     /*
     //TESTING.. TO BE DELETED
