@@ -89,13 +89,15 @@ let exportedMethods = {
     async calculateKarmaCount(id) {
         allDeedRatings = await deedRating.getAllDeedRatingsForDeedId(id);
         let count = 0;
+        let avgKarmaCount = 0;
         if(allDeedRatings == null){
             return 0;
         }
         for (var singleRating of allDeedRatings) {
             count += singleRating.rating;
         }
-        return count;
+        avgKarmaCount = count / allDeedRatings.length;
+        return avgKarmaCount;
     },
     async getDeedsForAllUsers(userId) {
         const deedCollection = await deedsList();

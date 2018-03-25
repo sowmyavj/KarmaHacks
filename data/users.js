@@ -5,7 +5,7 @@ const mongoCollections = require("../config/mongoCollections");
 const usersList = mongoCollections.users;
 var ObjectID = require('mongodb').ObjectID;
 var bcrypt = Promise.promisifyAll(require("bcrypt"));
-
+//const deedsColl = require("./deeds");
 
 
 let exportedMethods = {
@@ -170,9 +170,23 @@ let exportedMethods = {
         return result;
     },
 
-    async calculatePoints(id){
-        let count=0;
-        return count;
+    async calculatePoints(allDeedsColl){
+        let kScore=0;
+        let weight = 1;
+        let eachDeed = {};
+
+        //const allDeedsColl = await deedsColl.getAllDeedsForUserId(id);
+        console.log(allDeedsColl);
+        // for(eachDeed of allDeedsColl){
+        //     console.log("In data module users.js, calculatePoints method");
+        //     console.log(id);
+        //     console.log(eachDeed._id);
+        //     console.log("Deed's karmaCount: "+ eachDeed.karmaCount);
+        //     console.log("weight: "+weight);
+        //     kScore+=(eachDeed.karmaCount*weight);
+        //     weight+=1;
+        // }
+      return kScore;
     }
 
 }
