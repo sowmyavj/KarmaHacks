@@ -175,6 +175,9 @@ router.get('/dashboard',
   require('connect-ensure-login').ensureLoggedIn("/"),
   async function (req, res) {
 
+    let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
+    console.log(typeof deedData);
+
     /*
     //TESTING.. TO BE DELETED
     
@@ -226,9 +229,10 @@ router.get('/dashboard',
 
       res.render('users/dashboard', {
         user: req.user,
+        deed : deedData/* ,
         helpers: {
           toage: function (dob) { return getAge(dob); }
-        }
+        } */
       },
       );
     

@@ -171,8 +171,8 @@ async function runSetup() {
     var deed1Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedJackD_1._id,2,"11/27/2017");
     var deed1Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedJackD_1._id,2,"11/27/2017");
 
-    var deed2Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedJackD_2._id,2,"12/27/2017");
-    var deed2Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedJackD_2._id,2,"11/28/2017");
+    var deed2Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedRose_1._id,2,"12/27/2017");
+    var deed2Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedRose_1._id,2,"11/28/2017");
 
     deedRatingsLst=[];
     deedRatingsLst.push(deed1Rating1);
