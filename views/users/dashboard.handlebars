@@ -74,6 +74,19 @@
                         </li>
                     </ul>
                 </div>
+                <div class="col-sm-6 form-group">
+                            <label for="rating">Rate Deed</label>
+                            <select class="custom-select form-control" name="rating" id="rating">
+                                {{#select user.rating}}
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                               
+                                {{/select}}
+                            </select>
+                </div>
             </div>
         </div>
         {{/each}}
