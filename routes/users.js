@@ -4,6 +4,8 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 const data = require("../data");
 const userData = data.users;
+const deedsData=data.deeds;
+const uuidv1 = require('uuid/v4');
 
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
@@ -172,7 +174,56 @@ router.post("/profile", multipartMiddleware,async (req, res) => {
 router.get('/dashboard',
   require('connect-ensure-login').ensureLoggedIn("/"),
   async function (req, res) {
+
+    /*
+    //TESTING.. TO BE DELETED
     
+      let r1= await userData.getUser(req.user._id);
+      console.log("*********   user details *************")
+      console.log(r1);
+      console.log("***********************************\n\n")
+
+      let ex=  {
+        _id:uuidv1(),
+        user_id: req.user._id,
+        description: "Added a new deed.. just testing",
+        karmaCount: 2,
+        hours: 2,
+        dateOfDeed:"12/27/2018"
+    }
+
+    let r5= await deedsData.addDeed(ex);
+    console.log("*********  add deed *************")
+      console.log(r5);
+      console.log("***********************************\n\n")
+
+      
+
+      let r2= await deedsData.getAllDeedsForUserId(req.user._id);
+      console.log("*********   all deeds for user details *************")
+      console.log(r2);
+      console.log("***********************************\n\n")
+
+
+      let r3= await deedsData.getDeed(r2[0]._id);
+      console.log("*********   first deed details *************")
+      console.log(r3);
+      console.log("***********************************\n\n")
+
+      let r6= await deedsData.calculateKarmaCount(r2[0]._id);
+    console.log("*********  Karma count *************")
+      console.log(r6);
+      console.log("***********************************\n\n")
+
+      let r4= await deedsData.getAllDeedRatings(r2[0]._id);
+      console.log("*********   all ratings for first dees details *************")
+      console.log(r4);
+      console.log("***********************************\n\n")
+
+       /*
+    //TESTING.. TO BE DELETED -- END
+    */
+
       res.render('users/dashboard', {
         user: req.user,
         helpers: {
