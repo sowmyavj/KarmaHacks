@@ -5,7 +5,8 @@ const mongoCollections = require("../config/mongoCollections");
 const deedsList = mongoCollections.deeds;
 var ObjectID = require('mongodb').ObjectID;
 var bcrypt = Promise.promisifyAll(require("bcrypt"));
-const deedRating= require("./deeds_rating");
+const deedRating = require("./deeds_rating");
+const users = require("./users");
 
 
 
@@ -19,7 +20,7 @@ let exportedMethods = {
         return listOfDeeds[0];
     },
 
-    
+
 
     async addDeed(deed) {
 
@@ -29,7 +30,7 @@ let exportedMethods = {
             _id: uuidv1(),
             user_id: deed.user_id,
             description: deed.description,
-            hours:deed.hours,
+            hours: deed.hours,
             karmaCount: deed.karmaCount,
             dateOfDeed: deed.dateOfDeed
         };
@@ -47,13 +48,13 @@ let exportedMethods = {
             _id: oldDeed._id,
             user_id: oldDeed.user_id,
             description: oldDeed.description,
-            hours:oldDeed.hours,
+            hours: oldDeed.hours,
             karmaCount: oldDeed.karmaCount,
             dateOfDeed: oldDeed.dateOfDeed
         };
 
         if (inc != null) {
-            updatedDeed.karmaCount = updatedDeed.karmaCount+inc;
+            updatedDeed.karmaCount = updatedDeed.karmaCount + inc;
         }
 
         const deedCollection = await deedsList();
@@ -61,6 +62,7 @@ let exportedMethods = {
         return await this.getDeed(updatedDeed._id);
     },
 
+<<<<<<< HEAD
     async updateDeed(deed) {
 
         oldDeed = await this.getDeed(deed._id);
@@ -83,6 +85,9 @@ let exportedMethods = {
     },
 
     
+=======
+
+>>>>>>> 53d56e8e6c728e5a6a8b843ce93d34bb22573885
     async removeDeed(id) {
         const deedCollection = await deedsList();
         const deletionInfo = await deedCollection.removeOne({ _id: id });
@@ -106,7 +111,7 @@ let exportedMethods = {
         return allDeedRatings;
     },
 
-    async calculateKarmaCount(id){
+    async calculateKarmaCount(id) {
         allDeedRatings = await deedRating.getAllDeedRatingsForDeedId(id);
         let count=0;
         let avgKarmaCount = 0;
@@ -125,7 +130,29 @@ let exportedMethods = {
         if (allDeeds.length === 0) {
             return null;
         }
-        return allDeeds;
+        //console.log(allDeeds);
+        //let user, karmacount, karmaRating;
+        let deedlist = [];
+       
+        for (var d of allDeeds) {
+  //          console.log("One deed")
+    //        console.log(d);
+            if (userId != d.user_id) {
+                let deedObject = {};
+                let user = await users.getUser(d.user_id);
+                let c1 = await this.calculateKarmaCount(d._id);
+                let c2 = await users.calculatePoints(d.user_id);
+                deedObject.userName = user.name;
+
+                deedObject.karmaCount = c1;
+                deedObject.karmaPoints = c2;
+                deedObject.description = d.description;
+                deedlist.push(deedObject);
+            }
+
+        }
+
+        return deedlist;
     }
 
 }

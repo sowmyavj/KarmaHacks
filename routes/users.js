@@ -18,6 +18,21 @@ cloudinary.config({
 var setCookie = require('set-cookie-parser');
 var xss = require("xss");
 
+function getTodayDate(){
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //January is 0!
+
+  let yyyy = today.getFullYear();
+  if(dd<10){
+    dd='0'+dd;
+  } 
+  if(mm<10){
+    mm='0'+mm;
+  } 
+   today = dd+'/'+mm+'/'+yyyy;
+  return today;
+}
 passport.use(new Strategy(
   async function(username, password, cb) {
       console.log("user: pass:"+username+" "+password);
@@ -174,7 +189,16 @@ router.post("/profile", multipartMiddleware,async (req, res) => {
 router.get('/dashboard',
   require('connect-ensure-login').ensureLoggedIn("/"),
   async function (req, res) {
+<<<<<<< HEAD
 
+=======
+    console.log("get dashboard")
+    let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
+    console.log(deedData);
+    //console.log(Object.prototype.toString.call(deedData));
+    /*
+    //TESTING.. TO BE DELETED
+>>>>>>> 53d56e8e6c728e5a6a8b843ce93d34bb22573885
     
     //TESTING.. TO BE DELETED
     /*
@@ -234,9 +258,11 @@ router.get('/dashboard',
 
       res.render('users/dashboard', {
         user: req.user,
-        helpers: {
+        deed : deedData 
+        
+                /*helpers: {
           toage: function (dob) { return getAge(dob); }
-        }
+        } */
       },
       );
     
@@ -274,8 +300,27 @@ function getAge(dateString) {
 
 
 router.post('/dashboard',
-  function (req, res) {
-
+  async function (req, res) {
+    console.log("date")
+    let date=getTodayDate()
+    console.log(date)
+    let deed={
+            user_id: req.user._id,
+            description: req.body.description,
+            hours: req.body.hours,
+            karmaCount: 0,
+            dateOfDeed: date
+    }
+    let result = await deedsData.addDeed(deed)
+    console.log("added deed:: ")
+    console.log(result);
+    let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
+    res.render('users/dashboard', {
+      user: req.user,
+      deed : deedData 
+    },
+    );
+    
   });
 
 router.post('/login',

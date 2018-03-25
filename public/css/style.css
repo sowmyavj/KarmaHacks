@@ -157,8 +157,9 @@ a {
   background: #fff none repeat scroll 0 0;
   border: 1px solid #e1e8ed;
   border-radius: 6px;
-  height: 260px;
+  height: 306px;
   margin-bottom: 15px;
+  margin-top: 20px;
   /*max-width: 340px;*/
 }
 .twPc-bg {
@@ -167,7 +168,7 @@ a {
   background-size: 100% auto;
   border-bottom: 1px solid #e1e8ed;
   border-radius: 4px 4px 0 0;
-  height: 95px;
+  height: 50px;
   width: 100%;
 }
 .twPc-block {
@@ -256,4 +257,10 @@ ul.twPc-Arrange {
   overflow: hidden;
   text-transform: uppercase;
   transition: color 0.15s ease-in-out 0s;
+}
+.deed-description {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 55px;
+  margin-left: 10px;
 }

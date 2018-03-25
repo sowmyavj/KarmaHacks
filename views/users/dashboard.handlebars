@@ -2,15 +2,26 @@
 
 <head>
     <title>Effugio</title>
-    {{!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> --}}
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    {{!--
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> --}} {{!--
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"> --}}
 </head>
 <hr>
 
 <body>
+    <div class="row"></div>
+    <form method="post">
+        <div class="col col-lg-10">
+            <textarea class="form-control" cols="100" rows="2" placeholder="Add your good deeds!" id="description" name="description" required></textarea>
+            <br/>
+            <textarea class="form-control" cols="5" rows="1" placeholder="Hours" id="hours" name="hours" required></textarea>
+        </div>
+        <button class="btn btn-primary">Post</button>
+    </form>
+
+    </div>
     <div class="container">
-        <!-- code start -->
-        {{#for 2}}
+        {{#each deed}}
         <div class="row">
             <div class="twPc-div">
                 <a class="twPc-bg twPc-block"></a>
@@ -19,17 +30,31 @@
                         <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
                         <a href="#" mertskaplanmertskaplan class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false"
                             data-dnt="true">View Profile</a>
-                        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+                        <script>!function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                                if (!d.getElementById(id)) {
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = p + '://platform.twitter.com/widgets.js';
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }
+                            }(document, 'script', 'twitter-wjs');</script>
                         <!-- Twitter Button -->
                     </div>
 
-                    <a title="Mert Salih Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
-                        <img alt="Mert Salih Kaplan" src="https://pbs.twimg.com/profile_images/378800000352678934/34f9e192635975bf42e534434e2b6273_bigger.jpeg" class="twPc-avatarImg"/>
-                    </a>
+                    {{!-- <a title="Mert Salih Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                        <img alt="Mert Salih Kaplan" src="https://pbs.twimg.com/profile_images/378800000352678934/34f9e192635975bf42e534434e2b6273_bigger.jpeg"
+                            class="twPc-avatarImg" />
+                    </a> --}}
 
                     <div class="twPc-divUser">
                         <div class="twPc-divName">
-                            <a href="https://twitter.com/mertskaplan">Mert S. Kaplan</a>
+                            <p>{{userName}}</p>
+                        </div>
+                    </div>
+                    <div class="deed">
+                        <div class="deed-description">
+                            <p>{{description}}</p>
                         </div>
                     </div>
                 </div>
@@ -38,20 +63,19 @@
                         <li class="twPc-ArrangeSizeFit Deed">
                             <a href="https://twitter.com/mertskaplan" title="9.840 Tweet">
                                 <span class="twPc-StatLabel twPc-block">Deed Rating</span>
-                                <span class="twPc-StatValue">9.840</span>
+                                <span class="twPc-StatValue">{{karmaCount}}</span>
                             </a>
                         </li>
                         <li class="twPc-ArrangeSizeFit Karma">
                             <a href="https://twitter.com/mertskaplan/following" title="885 Following">
                                 <span class="twPc-StatLabel twPc-block">Karma Rating</span>
-                                <span class="twPc-StatValue">885</span>
+                                <span class="twPc-StatValue">{{karmaPoints}}</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
-    {{/for}}
+        {{/each}}
     </div>
 </body>
