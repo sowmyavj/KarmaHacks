@@ -274,6 +274,7 @@ router.post('/dashboard',
     let result = await deedsRatingData.addDeedRating(rating);
      console.log("added deed rating:: ")
     console.log(result);
+    setTimeout(() => {},500)
     let deedData = await deedsData.getAllDeedsForUser(req.user._id);
     res.render('users/dashboard', {
       user: req.user,

@@ -92,7 +92,7 @@ let exportedMethods = {
       count += singleRating.rating;
     }
     avgDeedScore = count / allDeedRatings.length;
-    return avgDeedScore;
+    return parseInt(avgDeedScore);
   },
 
   async calculateUserKarmaPoints(id) {
