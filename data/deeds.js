@@ -119,6 +119,7 @@ let exportedMethods = {
 
                 deedObject.karmaCount = c1;
                 deedObject.karmaPoints = c2;
+                deedObject.description = d.description;
                 deedlist.push(deedObject);
             }
 
