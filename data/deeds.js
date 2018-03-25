@@ -92,6 +92,14 @@ let exportedMethods = {
             count+=singleRating.rating;
         } 
         return count;
+    },
+    async getDeedsForAllUsers(userId) {
+        const deedCollection = await deedsList();
+        const allDeeds = await deedCollection.find().toArray();
+        if (allDeeds.length === 0) {
+            return null;
+        }
+        return allDeeds;
     }
 
 }
