@@ -109,13 +109,14 @@ let exportedMethods = {
        
         for (var d of allDeeds) {
   //          console.log("One deed")
-   //         console.log(d);
+    //        console.log(d);
             if (userId != d.user_id) {
                 let deedObject = {};
                 let user = await users.getUser(d.user_id);
                 let c1 = await this.calculateKarmaCount(d._id);
                 let c2 = await users.calculatePoints(d.user_id);
-                //deedObject.user = user;
+                deedObject.userName = user.name;
+
                 deedObject.karmaCount = c1;
                 deedObject.karmaPoints = c2;
                 deedlist.push(deedObject);

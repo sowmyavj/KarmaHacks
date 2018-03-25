@@ -176,9 +176,8 @@ router.get('/dashboard',
   async function (req, res) {
 
     let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
-    console.log("\n\n***********************\n\n")
     console.log(deedData);
-
+    //console.log(Object.prototype.toString.call(deedData));
     /*
     //TESTING.. TO BE DELETED
     
@@ -230,8 +229,8 @@ router.get('/dashboard',
 
       res.render('users/dashboard', {
         user: req.user,
-        deed : deedData/* ,
-        helpers: {
+        deed : deedData 
+                /*helpers: {
           toage: function (dob) { return getAge(dob); }
         } */
       },
