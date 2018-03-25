@@ -1,49 +1,57 @@
 <!DOCTYPE html>
+
 <head>
-  <title>Effugio</title>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <title>Effugio</title>
+    {{!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> --}}
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 </head>
 <hr>
-<div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="main-box no-header clearfix">
-                <div class="main-box-body clearfix">
-                   <div class="table-responsive">
-                        <table id="ConnectionsTable" class="table user-list" >
-                            <thead>
-                                <tr>
-                                <th><span>User</span></th>
-                                <th><span>Age</span></th>
-                                
-                                </tr>
-                            </thead>
-                            <tbody id="tbody">
-                                {{#each users }}
-                                <tr>
-                                    <td>
-                                        {{!-- <img src="https://bootdey.com/img/Content/user_2.jpg" alt=""> --}}
-                                        <img src="http://res.cloudinary.com/effugio/image/upload/c_fill,r_20/{{ _id}}.png" class="avatar img-circle" alt="avatar">
 
-                                        <a href="/users/checkprofile/{{_id}}" class="user-link">{{name}}</a>
-                                        <span class="user-subhead">{{location}}</span>
-                                    </td>
-                                <td class="text-center">
-                                        {{{toage dob}}}</td>
-                                
-                                {{/each}}
-                            
-                            </tbody>
-                        </table>
+<body>
+    <div class="container">
+        <!-- code start -->
+        {{#for 2}}
+        <div class="row">
+            <div class="twPc-div">
+                <a class="twPc-bg twPc-block"></a>
+                <div>
+                    <div class="twPc-button">
+                        <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+                        <a href="#" mertskaplanmertskaplan class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false"
+                            data-dnt="true">View Profile</a>
+                        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+                        <!-- Twitter Button -->
                     </div>
+
+                    <a title="Mert Salih Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                        <img alt="Mert Salih Kaplan" src="https://pbs.twimg.com/profile_images/378800000352678934/34f9e192635975bf42e534434e2b6273_bigger.jpeg" class="twPc-avatarImg"/>
+                    </a>
+
+                    <div class="twPc-divUser">
+                        <div class="twPc-divName">
+                            <a href="https://twitter.com/mertskaplan">Mert S. Kaplan</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="twPc-divStats">
+                    <ul class="twPc-Arrange">
+                        <li class="twPc-ArrangeSizeFit Deed">
+                            <a href="https://twitter.com/mertskaplan" title="9.840 Tweet">
+                                <span class="twPc-StatLabel twPc-block">Deed Rating</span>
+                                <span class="twPc-StatValue">9.840</span>
+                            </a>
+                        </li>
+                        <li class="twPc-ArrangeSizeFit Karma">
+                            <a href="https://twitter.com/mertskaplan/following" title="885 Following">
+                                <span class="twPc-StatLabel twPc-block">Karma Rating</span>
+                                <span class="twPc-StatValue">885</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-
-
-
-
+    {{/for}}
+    </div>
+</body>
