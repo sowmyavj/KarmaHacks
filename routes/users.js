@@ -6,7 +6,6 @@ const data = require("../data");
 const userData = data.users;
 const deedsData=data.deeds;
 const uuidv1 = require('uuid/v4');
-
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 var cloudinary = require('cloudinary').v2;
@@ -300,6 +299,35 @@ router.post('/dashboard',
     let result = await deedsData.addDeed(deed)
     console.log("added deed:: ")
     console.log(result);
+    let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
+    res.render('users/dashboard', {
+      user: req.user,
+      deed : deedData 
+    },
+    );
+    
+  });
+
+
+  router.post('/addRating',
+  async function (req, res) {
+    console.log("dashboard 2 post")
+    let date=getTodayDate()
+    console.log(req.body.rating);
+    console.log(req.user._id);
+    console.log(req.body.deedid);
+    console.log(req.body.deeduserid);
+    //deed user id
+    let rating={
+            voter_id: req.user._id,
+            user_id:req.body.deeduserid,
+            deed_id: req.body.deedid,
+            rating: req.body.rating,
+            dateOfRating: date
+    }
+    // let result = await deedsData.addDeed(deed)
+    // console.log("added deed:: ")
+    // console.log(result);
     let deedData = await deedsData.getDeedsForAllUsers(req.user._id);
     res.render('users/dashboard', {
       user: req.user,

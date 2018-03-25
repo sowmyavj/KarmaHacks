@@ -9,7 +9,7 @@
 <hr>
 
 <body>
-    <div class="row"></div>
+
     <form method="post">
         <div class="col col-lg-10">
             <textarea class="form-control" cols="100" rows="2" placeholder="Add your good deeds!" id="description" name="description" required></textarea>
@@ -75,7 +75,10 @@
                     </ul>
                 </div>
                 <div class="col-sm-6 form-group">
-                            <label for="rating">Rate Deed</label>
+                     <form action="addRating" method="post" >
+                
+                    <label for="rating">Appreciate this deed</label>
+                     <div class="col col-lg-8">
                             <select class="custom-select form-control" name="rating" id="rating">
                                 {{#select user.rating}}
                                 <option value="1">1</option>
@@ -86,9 +89,23 @@
                                
                                 {{/select}}
                             </select>
+                               <div >
+                         <textarea  style="display:none;" class="form-control" cols="100" rows="2" placeholder="Add your good deeds!" id="deedid" name="deedid">5</textarea>
+                         <textarea  style="display:none;" class="form-control" cols="100" rows="2" placeholder="Add your good deeds!" id="deeduserid" name="deeduserid">5</textarea>
+                          
+                    </div>
+                            </div>
+                              <div class="col col-lg-4">
+                                 
+                                  <button class="btn btn-primary">UpKarma</button>
+                              </div>
+                    
+            </form>
+                           
                 </div>
             </div>
         </div>
+      
         {{/each}}
     </div>
 </body>

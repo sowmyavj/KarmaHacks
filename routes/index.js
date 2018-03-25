@@ -1,6 +1,8 @@
 const userRoutes = require("./users");
+var methodOverride = require("method-override")
 
 const constructorMethod = (app) => {
+	app.use(methodOverride('_method'));
     app.use("/users", userRoutes);
 
     app.use("/",ensureAuthenticated, (req, res) => {
