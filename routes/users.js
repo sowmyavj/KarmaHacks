@@ -175,13 +175,13 @@ router.get('/dashboard',
   require('connect-ensure-login').ensureLoggedIn("/"),
   async function (req, res) {
 
-    /*
-    //TESTING.. TO BE DELETED
     
+    //TESTING.. TO BE DELETED
+    /*
       let r1= await userData.getUser(req.user._id);
-      console.log("*********   user details *************")
+      console.log("*********   user details *************");
       console.log(r1);
-      console.log("***********************************\n\n")
+      console.log("***********************************\n\n");
 
       let ex=  {
         _id:uuidv1(),
@@ -190,35 +190,43 @@ router.get('/dashboard',
         karmaCount: 2,
         hours: 2,
         dateOfDeed:"12/27/2018"
-    }
+      }
 
     let r5= await deedsData.addDeed(ex);
     console.log("*********  add deed *************")
       console.log(r5);
       console.log("***********************************\n\n")
 
-      
 
       let r2= await deedsData.getAllDeedsForUserId(req.user._id);
-      console.log("*********   all deeds for user details *************")
+      console.log("*********   all deeds for user details *************");
       console.log(r2);
-      console.log("***********************************\n\n")
+      console.log("***********************************\n\n");
 
 
       let r3= await deedsData.getDeed(r2[0]._id);
-      console.log("*********   first deed details *************")
+      console.log("*********   first deed details *************");
       console.log(r3);
-      console.log("***********************************\n\n")
+      console.log("***********************************\n\n");
 
       let r6= await deedsData.calculateKarmaCount(r2[0]._id);
-    console.log("*********  Karma count *************")
+    console.log("*********  Karma count *************");
       console.log(r6);
-      console.log("***********************************\n\n")
+      console.log("***********************************\n\n");
+
+      r3.karmaCount = r6;
+      let updDeed = deedsData.updateDeed(r3);
+
 
       let r4= await deedsData.getAllDeedRatings(r2[0]._id);
-      console.log("*********   all ratings for first dees details *************")
+      console.log("*********   all ratings for first dees details *************");
       console.log(r4);
-      console.log("***********************************\n\n")
+      console.log("***********************************\n\n");
+
+      let kaScore = await userData.calculatePoints(req.user._id);
+      console.log("*********  User's karma score *************");
+      console.log(kaScore);
+      console.log("***********************************\n\n");*/
 
        /*
     //TESTING.. TO BE DELETED -- END

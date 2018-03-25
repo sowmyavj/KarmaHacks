@@ -150,14 +150,14 @@ async function runSetup() {
     usersins = await userCollection.find().toArray();
     // console.log(usersins);
 
-    var deedJackD_1 = makeDeed(userJack._id, "Spent time at the orphanage", 2, 4, "11/27/2017");
-    var deedJackD_2 = makeDeed(userJack._id, "Spent time at the orphanage", 2, 4, "12/27/2017");
-    var deedRose_1 = makeDeed(userRose._id, "Built website for local soup kitchen", 20, 10, "02/02/2018");
-    var deedRose_2 = makeDeed(userRose._id, "Ran marathon for cancer research", 5, 10, "02/02/2018");
+    var deedJackD_1 = makeDeed(userJack._id, "Spent time at the orphanage", 2, 0, "11/27/2017");
+    //var deedJackD_2 = makeDeed(userJack._id, "Spent time at the orphanage", 2, 4, "12/27/2017");
+    var deedRose_1 = makeDeed(userRose._id, "Built website for local NGO", 20, 20, "02/02/2018");
+    var deedRose_2 = makeDeed(userRose._id, "Ran marathon for cancer research", 5, 30, "02/02/2018");
 
     deedsList=[];
     deedsList.push(deedJackD_1);
-    deedsList.push(deedJackD_2);
+    //deedsList.push(deedJackD_2);
     deedsList.push(deedRose_1);
     deedsList.push(deedRose_2);
 
@@ -167,18 +167,24 @@ async function runSetup() {
     console.log(deedsins);
     console.log("***********************************\n\n")
 
+    //First Rating for Jack's Deed 1
+    var deed1Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedJackD_1._id,80,"11/27/2017");
+    //Second Rating for Jack's Deed 1
+    var deed1Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedJackD_1._id,80,"11/27/2017");
 
-    var deed1Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedJackD_1._id,2,"11/27/2017");
-    var deed1Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedJackD_1._id,2,"11/27/2017");
-
-    var deed2Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedJackD_2._id,2,"12/27/2017");
-    var deed2Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedJackD_2._id,2,"11/28/2017");
+    //First Rating for Rose's Deed 1
+    var deed1RoseRating1= makeDeedRating(deedRose_1.user_id,userJack._id,deedRose_1._id,20,"12/27/2017");
+    //Second Rating for Rose's Deed 2
+    var deed1RoseRating2= makeDeedRating(deedRose_1.user_id,userdane._id,deedRose_1._id,20,"11/28/2017");
+    //First Rating for Rose's Deed 2
+    var deed2RoseRating1= makeDeedRating(deedRose_2.user_id,userJack._id,deedRose_2._id,30,"11/28/2017");
 
     deedRatingsLst=[];
     deedRatingsLst.push(deed1Rating1);
     deedRatingsLst.push(deed1Rating2);
-    deedRatingsLst.push(deed2Rating1);
-    deedRatingsLst.push(deed2Rating2);
+    deedRatingsLst.push(deed1RoseRating1);
+    deedRatingsLst.push(deed1RoseRating2);
+    deedRatingsLst.push(deed2RoseRating1);
 
     ratingsColl= await deedRatingCollection.insertMany(deedRatingsLst);
     ratingsIns=await deedRatingCollection.find().toArray();

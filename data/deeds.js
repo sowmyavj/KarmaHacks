@@ -61,6 +61,27 @@ let exportedMethods = {
         return await this.getDeed(updatedDeed._id);
     },
 
+    async updateDeed(deed) {
+
+        oldDeed = await this.getDeed(deed._id);
+        const updatedDeed = {
+            _id: oldDeed._id,
+            user_id: oldDeed.user_id,
+            description: oldDeed.description,
+            hours:oldDeed.hours,
+            karmaCount: oldDeed.karmaCount,
+            dateOfDeed: oldDeed.dateOfDeed
+        };
+
+        if (deed.karmaCount != null) {
+            updatedDeed.karmaCount = deed.karmaCount;
+        }
+
+        const deedCollection = await deedsList();
+        output = await deedCollection.updateOne({ _id: updatedDeed._id }, updatedDeed);
+        return await this.getDeed(updatedDeed._id);
+    },
+
     
     async removeDeed(id) {
         const deedCollection = await deedsList();
@@ -88,10 +109,15 @@ let exportedMethods = {
     async calculateKarmaCount(id){
         allDeedRatings = await deedRating.getAllDeedRatingsForDeedId(id);
         let count=0;
+        let avgKarmaCount = 0;
         for(var singleRating of allDeedRatings){
             count+=singleRating.rating;
         } 
-        return count;
+        avgKarmaCount = count / (allDeedRatings.length);
+        /*console.log("In data module deeds.js, calculateKarmaCount method");
+        console.log("sum of all ratings: "+count);
+        console.log("number of ratings: "+allDeedRatings.length);*/
+        return avgKarmaCount;
     },
     async getDeedsForAllUsers(userId) {
         const deedCollection = await deedsList();
