@@ -159,6 +159,7 @@ a {
   border-radius: 6px;
   height: 260px;
   margin-bottom: 15px;
+  margin-top: 20px;
   /*max-width: 340px;*/
 }
 .twPc-bg {
@@ -167,7 +168,7 @@ a {
   background-size: 100% auto;
   border-bottom: 1px solid #e1e8ed;
   border-radius: 4px 4px 0 0;
-  height: 95px;
+  height: 50px;
   width: 100%;
 }
 .twPc-block {
