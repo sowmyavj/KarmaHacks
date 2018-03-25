@@ -168,6 +168,11 @@ let exportedMethods = {
     async comparePassword(password, hash) {
         result = await bcrypt.compareAsync(password, hash);
         return result;
+    },
+
+    async calculatePoints(id){
+        let count=0;
+        return count;
     }
 
 }

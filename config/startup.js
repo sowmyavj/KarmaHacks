@@ -1,15 +1,39 @@
 const MongoClient = require("mongodb").MongoClient;
 const uuidv1 = require('uuid/v4');
 const users = "usersData";
+const deeds="deedsData";
+const deedRatings="deeds_ratingData";
+
 
 const settings = {
     mongoConfig: {
         serverUrl: "mongodb://localhost:27017/",
-        database: "effugio"
+        database: "KarmaHacks"
     }
 };
+let makeDeed = function (user_id, description, hours, karmaCount, date) {
+        return {
+            _id:uuidv1(),
+            user_id: user_id,
+            description: description,
+            karmaCount: karmaCount,
+            hours: hours,
+            dateOfDeed:date
+        }
+    };
+let makeDeedRating = function (user_id, voter_id, deed_id, rating, date) {
+            return {
+                _id:uuidv1(),
+                user_id: user_id,
+                voter_id: voter_id,
+                deed_id: deed_id,
+                rating: rating,
+                dateOfRating: date
+            }
+        };
 
-var makeDoc = function (user_id, name, hashedPassword, dob, gender, location, occupation,
+
+let makeDoc = function (user_id, name, hashedPassword, dob, gender, location, occupation,
 email,points, isOrganisation) {
     return {
         user_id: user_id,
@@ -35,16 +59,11 @@ async function runSetup() {
     // create db connection
     const db = await MongoClient.connect(fullMongoUrl);
 
-    // adding travel data seed
-    //NM - Commenting the below collection drop line as starting the application gives 'MongoError: ns not found' error
-    //NM - According to lecturer's code dropping the database rather than a specific collection.
-    //await db.collection(travel).drop();
-    await db.dropDatabase();
+   await db.dropDatabase();
 
-    //adding users data seed
-    //NM - Commenting the below collection drop line as starting the application gives 'MongoError: ns not found' error
-   //await db.collection(users).drop();
     userCollection = await db.createCollection(users);
+    deedCollection= await db.createCollection(deeds);
+    deedRatingCollection= await db.createCollection(deedRatings);
 
 
     var userJack = makeDoc("jack_d", "Jack Dawson", "", "01/01/1990", "M", "Hoboken", "Teacher","jack_d@gmail.com",
@@ -130,6 +149,42 @@ async function runSetup() {
     res = await userCollection.insertMany(usersList);
     usersins = await userCollection.find().toArray();
     // console.log(usersins);
+
+    var deedJackD_1 = makeDeed(userJack._id, "Spent time at the orphanage", 2, 4, "11/27/2017");
+    var deedJackD_2 = makeDeed(userJack._id, "Spent time at the orphanage", 2, 4, "12/27/2017");
+    var deedRose_1 = makeDeed(userRose._id, "Built website for local soup kitchen", 20, 10, "02/02/2018");
+    var deedRose_2 = makeDeed(userRose._id, "Ran marathon for cancer research", 5, 10, "02/02/2018");
+
+    deedsList=[];
+    deedsList.push(deedJackD_1);
+    deedsList.push(deedJackD_2);
+    deedsList.push(deedRose_1);
+    deedsList.push(deedRose_2);
+
+    deedsColl = await deedCollection.insertMany(deedsList);
+    deedsins = await deedCollection.find().toArray();
+    console.log("*********   DEEDS INSERTED *************")
+    console.log(deedsins);
+    console.log("***********************************\n\n")
+
+
+    var deed1Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedJackD_1._id,2,"11/27/2017");
+    var deed1Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedJackD_1._id,2,"11/27/2017");
+
+    var deed2Rating1= makeDeedRating(deedJackD_1.user_id,userRose._id,deedJackD_2._id,2,"12/27/2017");
+    var deed2Rating2= makeDeedRating(deedJackD_1.user_id,userdane._id,deedJackD_2._id,2,"11/28/2017");
+
+    deedRatingsLst=[];
+    deedRatingsLst.push(deed1Rating1);
+    deedRatingsLst.push(deed1Rating2);
+    deedRatingsLst.push(deed2Rating1);
+    deedRatingsLst.push(deed2Rating2);
+
+    ratingsColl= await deedRatingCollection.insertMany(deedRatingsLst);
+    ratingsIns=await deedRatingCollection.find().toArray();
+    console.log("*********   DEEDS RATING INSERTED *************")
+    console.log(ratingsIns);
+    console.log("***********************************\n\n")
 
     return usersins;
 
